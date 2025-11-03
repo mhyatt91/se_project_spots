@@ -12,6 +12,10 @@
   font-size: 20px;
   line-height: 120%;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 119px;
 }
 
 .card__content {
@@ -25,8 +29,6 @@
   width: 23px;
   height: 20px;
   background-repeat: no-repeat;
-  top: 425px;
-  left: 390px;
   opacity: 40%;
   border: none;
 }
@@ -39,5 +41,9 @@
 @media screen and (max-width: 627px) {
   .card__image {
     height: 288px;
+  }
+  .card__title {
+    max-width: 250px;
+    font-size: 16px;
   }
 }
