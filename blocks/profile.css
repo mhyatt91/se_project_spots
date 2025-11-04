@@ -77,11 +77,11 @@
   line-height: 100%;
   border-radius: 8px;
   border: none;
+  background: #212121;
 }
 
 .profile__add-btn:hover {
-  background-color: #212121;
-  opacity: 100%;
+  opacity: 0.8;
   cursor: pointer;
 }
 

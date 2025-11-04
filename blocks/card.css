@@ -15,7 +15,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 119px;
 }
 
 .card__content {
@@ -25,8 +24,8 @@
 }
 
 .card__like-button {
-  background-image: url(../images/heart.svg);
-  width: 23px;
+  background-image: url("../images/heart.svg");
+  flex: 0 0 23px;
   height: 20px;
   background-repeat: no-repeat;
   opacity: 40%;
