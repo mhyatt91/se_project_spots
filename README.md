@@ -23,3 +23,7 @@ Good luck and have fun!
 **Video**
 
 [Link](https://drive.google.com/file/d/1ln3QY2KLCA63Yj1EhQ8R1z1iYYXxTV1k/view?usp=sharing)
+
+**New Link**
+
+[Link] https://mhyatt91.github.io/se_project_spots/
