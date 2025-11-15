@@ -11,10 +11,12 @@
   align-items: center;
   padding: 0 10px;
   transition: visibilty 0.5s linear, opacity 0.5s linear;
+  opacity: 0;
 }
 
 .modal_is-opened {
   visibility: visible;
+  opacity: 1;
 }
 
 .modal__container {
