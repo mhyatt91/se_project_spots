@@ -37,7 +37,6 @@ editProfileCloseBtn.addEventListener("click", function () {
   closeModal(editProfileModal);
 });
 
-console.log(newPostBtn); // null
 newPostBtn.addEventListener("click", function () {
   openModal(newPostModal);
 });
