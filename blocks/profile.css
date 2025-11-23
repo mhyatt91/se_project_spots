@@ -55,11 +55,11 @@
   font-weight: 500;
   line-height: 100%;
   padding: 0;
+  cursor: pointer;
 }
 
 .profile__edit-btn:hover {
   opacity: 80%;
-  cursor: pointer;
 }
 
 .profile__add-btn {
@@ -78,11 +78,11 @@
   border-radius: 8px;
   border: none;
   background: #212121;
+  cursor: pointer;
 }
 
 .profile__add-btn:hover {
   opacity: 0.8;
-  cursor: pointer;
 }
 
 @media screen and (max-width: 627px) {

@@ -30,11 +30,11 @@
   background-repeat: no-repeat;
   opacity: 40%;
   border: none;
+  cursor: pointer;
 }
 
 .card__like-button:hover {
   opacity: 100%;
-  cursor: pointer;
 }
 
 @media screen and (max-width: 627px) {
