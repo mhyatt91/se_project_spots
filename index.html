@@ -13,7 +13,7 @@
   <body>
     <div class="page">
       <header class="header">
-        <img src="./images/Logo.svg" alt="Spot Logo" class="header__logo" />
+        <img src="./images/logo.svg" alt="Spot Logo" class="header__logo" />
       </header>
       <main class="content">
         <section class="profile page__section">
@@ -100,7 +100,27 @@
           <button
             type="button"
             class="modal__close-btn modal__close_type-preview"></button>
-          <img src="../images/CloseIcon.svg"  
+          <img src="" alt="" class="modal__image" />
+          <p class="modal__caption"></p>
+        </div>
+      </div>
+    </div>
+
+     <div class="modal" id="preview-modal">
+        <div class="modal__image-container">
+          <button type="button" class="modal__close modal__close_type-preview"></button>
+          <img src="https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg" alt="" class="modal__image">
+          <p class="modal__caption">Golden Gate Bridge</h2>
+          
+        </div>
+      </div>
+    </div>
+    <div class="modal modal_type-preview" id="preview-modal">
+        <div class="modal__image-container">
+          <button
+            type="button"
+            class="modal__close-btn modal__close_type-preview"></button>
+          <img src="../images/close-icon.svg"  
           alt="" class="modal__image" />
           <p class="modal__caption"></p>
         </div>
@@ -109,6 +129,7 @@
 
     <template id="card-template">
       <li class="card">
+        <button class="card__delete-button" type="button"></button>
         <img
           src="#"
           alt=""
