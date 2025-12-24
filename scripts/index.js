@@ -49,7 +49,7 @@ const closeModal = (modal) => {
   modal.classList.remove("modal_is-opened");
 };
 
-const closePreviewModal = document.querySelector(".modal__close_type-preview");
+const closePreviewModal = document.querySelector(".modal__close_type_preview");
 const previewModal = document.querySelector("#preview-modal");
 const previewImage = previewModal.querySelector(".modal__image");
 const previewCaption = previewModal.querySelector(".modal__caption");
