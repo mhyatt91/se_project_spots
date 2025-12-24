@@ -50,7 +50,7 @@
   padding: 0 16px;
 }
 
-.modal__close_type_preview {
+.modal__close_preview {
   top: -48px;
   right: 0;
   background-image: url(../images/closeiconwhite.svg);
@@ -146,7 +146,7 @@
 }
 
 @media screen and (max-width: 627px) {
-  .modal__close_type_preview {
+  .modal__close_preview {
     top: -48px;
     right: 0;
   }
