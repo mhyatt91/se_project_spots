@@ -63,17 +63,13 @@ const profileNameEl = document.querySelector(".profile__name");
 const profileDescriptionEl = document.querySelector(".profile__description");
 const cardTemplate = document.querySelector("#card-template");
 
-const previewModalCloseBtn = previewModal.querySelector(".modal__close");
-const previewImageEl = previewModal.querySelector(".modal__image");
-// select name element
-
-cardTemplate.querySelector(".card");
 const cardsList = document.querySelector(".cards__list");
 
 function getCardElement(data) {
   const cardElement = cardTemplate.content.cloneNode(true);
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardImageEl = cardElement.querySelector(".card__image");
+  const cardLikeButton = cardElement.querySelector(".card__like-button");
 
   cardImageEl.addEventListener("click", () => {
     handleImageClick(data);
@@ -84,15 +80,19 @@ function getCardElement(data) {
   cardTitleEl.textContent = data.name;
 
   const cardDeleteBtnEl = cardElement.querySelector(".card__delete-button");
-  cardDeleteBtnEl.addEventListener("click", () => {
-    cardElement.remove();
-    cardElement = null;
+
+  cardDeleteBtnEl.addEventListener("click", (evt) => {
+    evt.target.closest(".card").remove();
   });
 
   cardImageEl.addEventListener("click", () => {
     previewImage.src = data.link;
     // set property values
     openModal(previewModal);
+  });
+
+  cardLikeButton.addEventListener("click", (evt) => {
+    evt.target.classList.toggle("card__like-button_active");
   });
 
   return cardElement;
@@ -125,17 +125,17 @@ newPostCloseBtn.addEventListener("click", function () {
 
 function handleEditProfileSubmit(evt) {
   evt.preventDefault();
+
   profileNameEl.textContent = editProfileNameInput.value;
   profileDescriptionEl.textContent = editProfileDescriptionInput.value;
-  editProfileModal.classList.remove("modal_is-opened");
+
+  closeModal(editProfileModal);
 }
 
 editProfileForm.addEventListener("submit", handleEditProfileSubmit);
 
 function handleNewPostSubmit(evt) {
   evt.preventDefault();
-  console.log(newPostImageInput.value);
-  console.log(newPostNameInput.value);
 
   const cardElement = getCardElement({
     link: newPostImageInput.value,
@@ -144,10 +144,9 @@ function handleNewPostSubmit(evt) {
 
   cardsList.prepend(cardElement);
 
-  // profileNameEl.textContent = newPostNameInput.value;
-  // profileDescriptionEl.textContent = newPostImageInput.value;
-  editProfileModal.classList.remove("modal_is-opened)");
-  newPostModal.classList.remove("modal_is-opened");
+  closeModal(newPostModal);
+
+  evt.target.reset();
 }
 
 newPostForm.addEventListener("submit", handleNewPostSubmit);

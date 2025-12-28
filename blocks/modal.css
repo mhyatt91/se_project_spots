@@ -32,7 +32,7 @@
 .modal__close-btn {
   width: 40px;
   height: 40px;
-  opacity: 40%;
+  opacity: 0.4;
   background-size: 28px;
   background-repeat: no-repeat;
   background-position: center;
@@ -40,7 +40,6 @@
   position: absolute;
   top: 32px;
   right: 50px;
-  background-color: #fff;
   background-image: url(../images/close-icon.svg);
   cursor: pointer;
   background-color: transparent;
@@ -71,7 +70,6 @@
   width: 100%;
   object-fit: contain;
   display: block;
-  border-radius: 8px;
   border-radius: 8px;
 }
 
@@ -113,7 +111,6 @@
   padding-right: 12px;
   padding-bottom: 16px;
   padding-left: 12px;
-  border-width: 1px;
   border: 1px solid rgba(33, 33, 33, 0.4);
 }
 
