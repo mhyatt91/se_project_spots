@@ -71,10 +71,6 @@ function getCardElement(data) {
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardLikeButton = cardElement.querySelector(".card__like-button");
 
-  cardImageEl.addEventListener("click", () => {
-    handleImageClick(data);
-  });
-
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
   cardTitleEl.textContent = data.name;
@@ -87,7 +83,6 @@ function getCardElement(data) {
 
   cardImageEl.addEventListener("click", () => {
     previewImage.src = data.link;
-    // set property values
     openModal(previewModal);
   });
 

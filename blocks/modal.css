@@ -50,8 +50,8 @@
 }
 
 .modal__close-btn_preview {
-  top: -48px;
-  right: 0;
+  top: -10px;
+  right: -40px;
   background-image: url(../images/closeiconwhite.svg);
   opacity: 1;
 }
