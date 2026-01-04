@@ -82,7 +82,7 @@ function getCardElement(data) {
   });
 
   cardImageEl.addEventListener("click", () => {
-    previewImage.src = data.link;
+    handleImageClick(data);
     openModal(previewModal);
   });
 
