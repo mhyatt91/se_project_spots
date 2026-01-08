@@ -31,3 +31,6 @@ Good luck and have fun!
 **GitHub Link**
 
 [Link] https://mhyatt91.github.io/se_project_spots/
+
+**Spots Stage 9 Sprint 6 Video Link 1/8/2026**
+[Link] https://1drv.ms/v/c/9f9693dbc179390f/IQDyN-f9Pem-TIVOP_B0v3KRAafNxECC1PVKbBygQJFG8ZI?e=ikI92Q

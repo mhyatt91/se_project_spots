@@ -34,7 +34,22 @@
           </button>
         </section>
         <section class="cards page__section">
-          <ul class="cards__list"></ul>
+          <ul class="cards__list">
+            <template id="card-template">
+              <li class="card">
+                <button class="card__delete-button" type="button"></button>
+                <img class="card__image" src="#" alt="" />
+                <div class="card__footer">
+                  <h2 class="card__title"></h2>
+                  <button
+                    aria-label="Like card"
+                    class="card__like-button"
+                    type="button"
+                  ></button>
+                </div>
+              </li>
+            </template>
+          </ul>
         </section>
       </main>
       <footer class="footer page__section">
@@ -44,7 +59,7 @@
         <div class="modal__container">
           <button type="button" class="modal__close-btn"></button>
           <h2 class="modal__title">Edit Profile</h2>
-          <form class="modal__form">
+          <form class="modal__form" id="edit-profile-form" novalidate>
             <label for="profile-name-input" class="modal__label">
               Name
               <input
@@ -52,7 +67,11 @@
                 type="text"
                 class="modal__input"
                 placeholder="Type your name"
+                minlength="2"
+                maxlength="40"
+                required
               />
+              <span class="modal__error" id="profile-name-input-error"></span>
             </label>
             <label for="profile-description-input" class="modal__label">
               Description
@@ -61,7 +80,14 @@
                 type="text"
                 class="modal__input"
                 placeholder="Describe yourself"
+                minlength="2"
+                maxlength="200"
+                required
               />
+              <span
+                class="modal__error"
+                id="profile-description-input-error"
+              ></span>
             </label>
             <button type="submit" class="modal__submit-btn">Save</button>
           </form>
@@ -71,7 +97,7 @@
         <div class="modal__container">
           <button type="button" class="modal__close-btn"></button>
           <h2 class="modal__title">New Post</h2>
-          <form class="modal__form" id="add-card-form">
+          <form class="modal__form" id="add-card-form" novalidate>
             <label for="card-image-input" class="modal__label">
               Image Link
               <input
@@ -81,6 +107,7 @@
                 placeholder="Place a link to the picture"
                 required
               />
+              <span id="card-image-input-error" class="modal__error"></span>
             </label>
             <label for="card-caption-input" class="modal__label">
               Caption
@@ -89,8 +116,11 @@
                 type="text"
                 class="modal__input"
                 placeholder="Type your caption"
+                minlength="2"
+                maxlength="30"
                 required
               />
+              <span class="modal__error" id="card-caption-input-error"></span>
             </label>
             <button type="submit" class="modal__submit-btn">Save</button>
           </form>
@@ -108,17 +138,7 @@
       </div>
     </div>
 
-    <template id="card-template">
-      <li class="card">
-        <button class="card__delete-button" type="button"></button>
-        <img src="#" alt="" class="card__image" />
-        <div class="card__content">
-          <h2 class="card__title"></h2>
-          <button type="button" class="card__like-button"></button>
-        </div>
-      </li>
-    </template>
-
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validation.js"></script>
   </body>
 </html>
