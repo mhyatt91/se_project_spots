@@ -43,32 +43,31 @@ const editProfileDescriptionInput = editProfileModal.querySelector(
   "#profile-description-input"
 );
 
-const handleOverlayClick = (e, modal) => {
+const handleOverlayClick = (e) => {
   if (e.target.classList.contains("modal")) {
+    const modal = document.querySelector(".modal_is-opened");
     closeModal(modal);
   }
 };
 
-const handleEscPress = (event, modal) => {
+const handleEscPress = (event) => {
   if (event.key === "Escape") {
+    const modal = document.querySelector(".modal_is-opened");
     closeModal(modal);
   }
 };
 
 const openModal = (modal) => {
   modal.classList.add("modal_is-opened");
-  modal.addEventListener("click", (event) => handleOverlayClick(event, modal));
+  modal.addEventListener("click", handleOverlayClick);
 
-  document.addEventListener("keydown", (event) => handleEscPress(event, modal));
+  document.addEventListener("keydown", handleEscPress);
 };
 
 const closeModal = (modal) => {
   modal.classList.remove("modal_is-opened");
-  modal.removeEventListener("click", (event) =>
-    handleOverlayClick(event, modal)
-  );
-
-  document.addEventListener("keydown", (event) => handleEscPress(event, modal));
+  modal.removeEventListener("click", handleOverlayClick);
+  document.removeEventListener("keydown", handleEscPress);
 };
 
 const closePreviewModal = document.querySelector(".modal__close-btn_preview");
@@ -81,7 +80,7 @@ const newPostCloseBtn = newPostModal.querySelector(".modal__close-btn");
 const newPostNameInput = newPostModal.querySelector("#card-caption-input");
 const newPostImageInput = newPostModal.querySelector("#card-image-input");
 const newPostForm = newPostModal.querySelector(".modal__form");
-const newPostSubmitBtn = newPostModal.querySelector(".modal__button");
+const newPostSubmitBtn = newPostModal.querySelector(".modal__submit-btn");
 const profileNameEl = document.querySelector(".profile__name");
 const profileDescriptionEl = document.querySelector(".profile__description");
 const cardsList = document.querySelector(".cards__list");
@@ -123,7 +122,6 @@ function handleImageClick(data) {
   previewImage.src = data.link;
   previewImage.alt = data.name;
   previewCaption.textContent = data.name;
-  openModal(previewModal);
 }
 
 editProfileBtn.addEventListener("click", function () {
