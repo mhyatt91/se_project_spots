@@ -1,4 +1,6 @@
-//Pass settings object to the validation functions that are called in this file
+import "../pages/index.css";
+import { enableValidation, settings } from "../scripts/validation.js";
+import Api from "../utils/Api.js";
 
 const initialCards = [
   {
@@ -32,15 +34,40 @@ const initialCards = [
   },
 ];
 
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "aeb240e6-c252-471d-9c51-9cacba72847b",
+    "Content-Type": "application/json",
+  },
+});
+
+// Destructure the second item in te callback of the .then()
+api
+  .getAppInfo()
+  .then(([cards]) => {
+    console.log(cards);
+    initialCards.forEach(function (item) {
+      const list = document.querySelector(".cards__list");
+      list.append(getCardElement(item));
+    });
+
+    // - TODO Handle the users information
+    // - set the src of the avatar image
+    // - set the textContent of both the text elements
+  })
+  .catch(console.error);
+
+// PROFILE ELEMENTS
 const editProfileBtn = document.querySelector(".profile__edit-btn");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const editProfileCloseBtn = editProfileModal.querySelector(".modal__close-btn");
 const editProfileForm = editProfileModal.querySelector(".modal__form");
 const editProfileNameInput = editProfileModal.querySelector(
-  "#profile-name-input"
+  "#profile-name-input",
 );
 const editProfileDescriptionInput = editProfileModal.querySelector(
-  "#profile-description-input"
+  "#profile-description-input",
 );
 
 const handleOverlayClick = (e) => {
@@ -130,7 +157,7 @@ editProfileBtn.addEventListener("click", function () {
   resetValidation(
     editProfileForm,
     [editProfileNameInput, editProfileDescriptionInput],
-    settings
+    settings,
   );
   openModal(editProfileModal);
 });
@@ -149,11 +176,18 @@ newPostCloseBtn.addEventListener("click", function () {
 
 function handleEditProfileSubmit(evt) {
   evt.preventDefault();
-
-  profileNameEl.textContent = editProfileNameInput.value;
-  profileDescriptionEl.textContent = editProfileDescriptionInput.value;
-
-  closeModal(editProfileModal);
+  api
+    .editUserInfo({
+      name: editProfileNameInput,
+      about: editProfileDescriptionInput,
+    })
+    .then((data) => {
+      // TODO Use data argument instead of input values
+      profileNameEl.textContent = editProfileNameInput.value;
+      profileDescriptionEl.textContent = editProfileDescriptionInput.value;
+      closeModal(editProfileModal);
+    })
+    .catch(console.error);
 }
 
 editProfileForm.addEventListener("submit", handleEditProfileSubmit);
@@ -177,7 +211,4 @@ closePreviewModal.addEventListener("click", function () {
   closeModal(previewModal);
 });
 
-initialCards.forEach(function (item) {
-  const list = document.querySelector(".cards__list");
-  list.append(getCardElement(item));
-});
+enableValidation(settings);

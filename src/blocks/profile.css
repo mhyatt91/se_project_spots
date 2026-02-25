@@ -4,6 +4,18 @@
   border-bottom: 1px rgba(33, 33, 33, 0.4) solid;
 }
 
+.profile__avatar-container {
+  position: relative;
+}
+
+.profile__avatar-btn {
+  position: absolute;
+}
+
+.profile__avatar-btn::after {
+  content: "Edit-Avatar";
+}
+
 .profile__avatar {
   height: 190px;
   width: 190px;
