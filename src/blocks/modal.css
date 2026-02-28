@@ -10,7 +10,9 @@
   justify-content: center;
   align-items: center;
   padding: 0 10px;
-  transition: visibility 0.5s linear, opacity 0.5s linear;
+  transition:
+    visibility 0.5s linear,
+    opacity 0.5s linear;
   opacity: 0;
 }
 
@@ -95,6 +97,12 @@
   flex-direction: column;
 }
 
+.modal__form-btns {
+  flex-direction: row;
+  /* justify-content: space-between;*/
+  gap: 20px;
+}
+
 .modal__label {
   margin: 0 0 32px;
 }
@@ -131,6 +139,22 @@
 
 .modal__input::placeholder {
   color: #2121214d;
+}
+
+.modal__cancel-btn {
+  width: 100%;
+  background-color: red;
+  max-width: 156px;
+  height: 52px;
+  border-radius: 8px;
+  color: #fcf5e5;
+  padding-top: 18px;
+  padding-right: 32px;
+  padding-bottom: 18px;
+  padding-left: 32px;
+  gap: 8px;
+  cursor: pointer;
+  border: none;
 }
 
 .modal__submit-btn {

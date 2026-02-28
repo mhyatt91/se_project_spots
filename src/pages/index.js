@@ -1,3 +1,4 @@
+import { data } from "autoprefixer";
 import "../pages/index.css";
 import { enableValidation, settings } from "../scripts/validation.js";
 import Api from "../utils/Api.js";
@@ -111,35 +112,51 @@ const newPostSubmitBtn = newPostModal.querySelector(".modal__submit-btn");
 const profileNameEl = document.querySelector(".profile__name");
 const profileDescriptionEl = document.querySelector(".profile__description");
 const cardsList = document.querySelector(".cards__list");
+const deleteModal = document.querySelector("#delete-modal");
+const deleteModalCloseBtn = deleteModal.querySelector(".modal__close-btn");
+const cancelModalCloseBtn = deleteModal.querySelector(".modal__cancel-btn");
+const deleteSubmitBtn = deleteModal.querySelector(".modal__submit-btn");
 
 const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
 
+let cardToDelete = null;
+
+function handleLike(evt, id) {
+  evt.target.classList.toggle("card__like-button_active");
+  // 1. check whether card is currently liked or not
+  // const isLiked = ???
+  // 2. call the changeLikeStatus method, passing the appropriate arguments
+  // 3. handle the response (.then and .catch)
+  // 4. in the .then, toggle active class
+}
+
+cardLikeButton.addEventListener("click", (evt) => handleLike(evt, data._id));
+deleteButton.addEventListener("click", () =>
+  handleDeleteCard(cardElement, data._id),
+);
+
 function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardImageEl = cardElement.querySelector(".card__image");
-
   const cardLikeButton = cardElement.querySelector(".card__like-button");
-
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
   cardTitleEl.textContent = data.name;
-
   const cardDeleteBtnEl = cardElement.querySelector(".card__delete-button");
 
+  //TODO - if the card is liked, set the acrive class on the card
+
   cardDeleteBtnEl.addEventListener("click", (evt) => {
-    evt.target.closest(".card").remove();
+    openModal(deleteModal);
+    cardToDelete = evt.target.closest(".card");
   });
 
   cardImageEl.addEventListener("click", () => {
     handleImageClick(data);
     openModal(previewModal);
-  });
-
-  cardLikeButton.addEventListener("click", (evt) => {
-    evt.target.classList.toggle("card__like-button_active");
   });
 
   return cardElement;
@@ -150,6 +167,14 @@ function handleImageClick(data) {
   previewImage.alt = data.name;
   previewCaption.textContent = data.name;
 }
+
+deleteSubmitBtn.addEventListener("click", () => {
+  if (cardToDelete) {
+    cardToDelete.remove();
+    cardToDelete = null;
+  }
+  closeModal(deleteModal);
+});
 
 editProfileBtn.addEventListener("click", function () {
   editProfileNameInput.value = profileNameEl.textContent;
@@ -164,6 +189,13 @@ editProfileBtn.addEventListener("click", function () {
 
 editProfileCloseBtn.addEventListener("click", function () {
   closeModal(editProfileModal);
+});
+deleteModalCloseBtn.addEventListener("click", function () {
+  closeModal(deleteModal);
+});
+
+cancelModalCloseBtn.addEventListener("click", function () {
+  closeModal(deleteModal);
 });
 
 newPostBtn.addEventListener("click", function () {
