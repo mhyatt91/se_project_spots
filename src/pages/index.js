@@ -1,6 +1,7 @@
 import { data } from "autoprefixer";
 import "../pages/index.css";
 import { enableValidation, settings } from "../scripts/validation.js";
+import { setButtonText } from "../utils/helpers.js";
 import Api from "../utils/Api.js";
 
 const initialCards = [
@@ -124,30 +125,30 @@ const cardTemplate = document
 let cardToDelete = null;
 
 function handleLike(evt, id) {
-  evt.target.classList.toggle("card__like-button_active");
-  // 1. check whether card is currently liked or not
-  // const isLiked = ???
-  // 2. call the changeLikeStatus method, passing the appropriate arguments
-  // 3. handle the response (.then and .catch)
-  // 4. in the .then, toggle active class
+  const isLiked = evt.target.classList.contains("card__like-button_active");
+  api
+    .changeLikeStatus(id, isLiked)
+    .then(() => {
+      evt.target.classList.toggle("card__like-button_active");
+    })
+    .catch(console.error);
 }
-
-cardLikeButton.addEventListener("click", (evt) => handleLike(evt, data._id));
-deleteButton.addEventListener("click", () =>
-  handleDeleteCard(cardElement, data._id),
-);
 
 function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardLikeButton = cardElement.querySelector(".card__like-button");
+
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
   cardTitleEl.textContent = data.name;
   const cardDeleteBtnEl = cardElement.querySelector(".card__delete-button");
 
-  //TODO - if the card is liked, set the acrive class on the card
+  cardLikeButton.addEventListener("click", (evt) => handleLike(evt, data._id));
+  cardDeleteBtnEl.addEventListener("click", () =>
+    handleDeleteCard(cardElement, data._id),
+  );
 
   cardDeleteBtnEl.addEventListener("click", (evt) => {
     openModal(deleteModal);
@@ -208,19 +209,29 @@ newPostCloseBtn.addEventListener("click", function () {
 
 function handleEditProfileSubmit(evt) {
   evt.preventDefault();
+
+  const newPostSubmitBtn = evt.submitter;
+  setButtonText(newPostSubmitBtn, true, "Save", "Saving...");
+
   api
     .editUserInfo({
       name: editProfileNameInput,
       about: editProfileDescriptionInput,
     })
     .then((data) => {
-      // TODO Use data argument instead of input values
-      profileNameEl.textContent = editProfileNameInput.value;
-      profileDescriptionEl.textContent = editProfileDescriptionInput.value;
+      // TODO - Use data argument instead of the input values
+      profileNameEl.textContent = data.name;
+      profileDescriptionEl.textContent = data.about;
       closeModal(editProfileModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      // TODO - call setButtonText instead
+      setButtonText(newPostSubmitBtn, false);
+    });
 }
+
+// TODO - implement loading text for all other form submissions
 
 editProfileForm.addEventListener("submit", handleEditProfileSubmit);
 
