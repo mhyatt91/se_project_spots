@@ -10,10 +10,8 @@
 
 .profile__avatar-btn {
   position: absolute;
-}
-
-.profile__avatar-btn::after {
-  content: "Edit-Avatar";
+  background: none;
+  border: none;
 }
 
 .profile__avatar {
