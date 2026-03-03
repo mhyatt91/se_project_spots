@@ -1,6 +1,10 @@
 import { data } from "autoprefixer";
 import "../pages/index.css";
-import { enableValidation, settings } from "../scripts/validation.js";
+import {
+  resetValidation,
+  enableValidation,
+  settings,
+} from "../scripts/validation.js";
 import { setButtonText } from "../utils/helpers.js";
 import Api from "../utils/Api.js";
 
@@ -71,6 +75,9 @@ const editProfileNameInput = editProfileModal.querySelector(
 const editProfileDescriptionInput = editProfileModal.querySelector(
   "#profile-description-input",
 );
+
+const createCardForm = document.querySelector("#add-card-form");
+const createCardFormCTA = createCardForm.querySelector(".modal__submit-btn");
 
 const handleOverlayClick = (e) => {
   if (e.target.classList.contains("modal")) {
@@ -215,11 +222,12 @@ function handleEditProfileSubmit(evt) {
 
   api
     .editUserInfo({
-      name: editProfileNameInput,
-      about: editProfileDescriptionInput,
+      name: editProfileNameInput.value,
+      about: editProfileDescriptionInput.value,
     })
     .then((data) => {
       // TODO - Use data argument instead of the input values
+      console.log(data);
       profileNameEl.textContent = data.name;
       profileDescriptionEl.textContent = data.about;
       closeModal(editProfileModal);
@@ -237,16 +245,26 @@ editProfileForm.addEventListener("submit", handleEditProfileSubmit);
 
 function handleNewPostSubmit(evt) {
   evt.preventDefault();
-  const cardElement = getCardElement({
+
+  createCardFormCTA.textContent = "Saving...";
+
+  const cardData = {
     link: newPostImageInput.value,
     name: newPostNameInput.value,
+  };
+
+  api.createCard(cardData).then((card) => {
+    const cardElement = getCardElement(card);
+
+    cardsList.prepend(cardElement);
+
+    closeModal(newPostModal);
+    evt.target.reset();
+
+    createCardFormCTA.textContent = "Save";
+
+    disableButton(newPostSubmitBtn, settings);
   });
-
-  cardsList.prepend(cardElement);
-
-  closeModal(newPostModal);
-  evt.target.reset();
-  disableButton(newPostSubmitBtn, settings);
 }
 
 newPostForm.addEventListener("submit", handleNewPostSubmit);
