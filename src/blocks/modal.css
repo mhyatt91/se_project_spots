@@ -57,6 +57,11 @@
   background-image: url(../images/closeiconwhite.svg);
 }
 
+modal__close-button_theme_light {
+  top: 324px;
+  left: 1047px;
+}
+
 .modal__close-btn:hover {
   opacity: 1;
 }
@@ -91,11 +96,13 @@
   font-weight: 500;
   color: #212121;
   font-family: Poppins, Arial, Helvetica, sans-serif;
+  text-align: center;
 }
 
 .modal__form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .modal__form-btns {
@@ -161,11 +168,11 @@
 
 .modal__submit-btn {
   width: 100%;
-  background-color: rgba(255, 101, 101, 1);
+  background-color: #212121;
   max-width: 156px;
   height: 52px;
   border-radius: 8px;
-  color: black;
+  color: white;
   padding-top: 18px;
   padding-right: 32px;
   padding-bottom: 18px;
@@ -174,6 +181,11 @@
   cursor: pointer;
   border: none;
   font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
+.modal__submit-btn_type_delete {
+  background-color: rgba(255, 101, 101, 1);
+  color: white;
 }
 
 .modal__submit-btn_disabled {
@@ -207,10 +219,6 @@
 
   .modal__image {
     max-width: unset;
-  }
-
-  .modal__title {
-    font-size: 20px;
   }
 
   .modal__input {
