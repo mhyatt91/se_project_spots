@@ -20,10 +20,7 @@ const api = new Api({
 api
   .getAppInfo()
   .then(([cards, userInfo]) => {
-    cards.forEach(function (item) {
-      const list = document.querySelector(".cards__list");
-      list.append(getCardElement(item));
-    });
+    cards.forEach((item) => cardsList.append(getCardElement(item)));
 
     profileNameEl.textContent = userInfo.name;
     profileDescriptionEl.textContent = userInfo.about;
@@ -48,8 +45,7 @@ const createCardFormCTA = createCardForm.querySelector(".modal__submit-btn");
 
 const handleOverlayClick = (e) => {
   if (e.target.classList.contains("modal")) {
-    const modal = document.querySelector(".modal_is-opened");
-    closeModal(modal);
+    closeModal(e.target);
   }
 };
 
